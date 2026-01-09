@@ -1,0 +1,296 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f4f6fb;
+}
+
+body{
+  font-family: "Urbanist", sans-serif;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+}
+
+.profile {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+
+.profile small {
+  color: #777;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #eef3ff;
+  color: #eb6234;
+}
+
+.logout {
+  background: #252525;
+  color: #eee;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 25px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+}
+
+.welcome {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eb6234;
+  color: #fff;
+}
+
+.welcome img {
+  width: 120px;
+}
+
+.upgrade {
+  color: #fff;
+}
+
+.upgrade ul {
+  margin: 15px 20px;
+}
+
+.upgrade li {
+  margin-bottom: 8px;
+}
+
+.primary {
+  background: #3562e9;
+  color: #fff;
+  border: 2px dashed rgba(255, 255, 255, 0.438);
+  padding: 5px 26px;
+  border-radius: 8px;
+  font-size: 24px;
+  margin-top: 10px;
+
+}
+
+.outline {
+  border: 1px solid #ccc;
+  color: #eee;
+  background: none;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.list .row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.activity li {
+  list-style: none;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.activity span {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+.full {
+  width: 100%;
+}
+
+.product{
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 30px;
+}
+
+/* MOBILE */
+@media(max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+.bs{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.prod{
+    background:#252525;
+    width:250px;
+    border-radius: 10px;
+    color:snow;
+    position: relative;
+}
+
+.gm{
+    position: absolute;
+    top: 184px;
+    right: 10px;
+    padding: 3px 7px;
+    border-radius: 6px 20px 20px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #eee;
+    color: #252525;
+}
+
+.prod .product-img{
+    width:100%;
+    transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.prod .proc{
+    width: 70px;
+}
+
+.prod section{
+    padding-left: 12px;
+    padding-bottom: 12px;
+}
+
+.prod section .atc{
+    width:94%;
+    background: #eb6234;
+    color:white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* HOVER (DESKTOP) */
+.prod:hover .product-img {
+    transform: scale(1.18);
+    filter: brightness(1.05);
+}
+
+/* TAP (MOBILE) */
+.prod:active .product-img {
+    transform: scale(1.22);
+}
+
+.qty-box {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  /* border-radius: 8/px; */
+  overflow: hidden;
+  width: 94%;
+  margin-bottom: 10px;
+}
+
+.qty-btn {
+  width: 30%;
+  height: 36px;
+  border: none;
+  background: #f5f5f5;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  /* background: #eaeaea; */
+}
+
+.qty-input {
+  width: 40%;
+  height: 36px;
+  border: none;
+  text-align: center;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+}
+
+/* Mobile friendly */
+@media (max-width: 600px) {
+  .qty-btn {
+    width: 30%;
+    height: 32px;
+  }
+  .qty-input {
+    width: 40%;
+    height: 32px;
+  }
+}

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Detail UI</title>
+<!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f8f5;
+  --primary: #3a2e4f;
+  --accent: #dfe8b6;
+  --text-dark: #1f2933;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow-soft: 0 12px 28px rgba(0,0,0,0.06);
+  --shadow-hover: 0 22px 45px rgba(0,0,0,0.14);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-dark);
+  font-family: "Urbanist", sans-serif;
+}
+
+.main-nav{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.barnav{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position:fixed;
+  z-index: 99999;
+  top:0px;
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 3px gray;
+}
+.barnavsub{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: max-content;
+  gap: 60px;
+}
+.barnav .logo{
+  width: 200px;
+  object-fit: fill;
+}
+.menu{
+  width: 30px;
+  background-color: transparent;
+  border: none;
+}
+.menu img{
+  width: 100%;
+}
+.menubar{
+  display: flex;
+  gap:20px;
+}
+
+@media screen and (min-width:320px) and (max-width:768px){
+ .barnavsub{
+  display: none;
+  justify-content: center;
+  align-content: center;
+  width: max-content;
+ }
+ .barnav{
+  width: 93%;
+  padding: 10px 30px;
+  justify-content: space-between;
+  border-radius: 18px;
+  top: 20px;
+ }
+ .barnav .logo{
+  width: 100px;
+ }
+ .menu{
+  background-color: transparent;
+  border: none;
+ }
+}
+
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+  margin-top:8rem;
+}
+
+.product-layout {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.1fr;
+  gap: 40px;
+}
+
+/* ---------- Thumbnails ---------- */
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top:10px;
+}
+
+.thumb {
+  background: #fff;
+  border-radius: 3px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: 0.3s var(--ease);
+}
+
+.thumb img {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.thumb.active {
+  border-color: var(--primary);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---------- Main Image ---------- */
+.product-image {
+  position: relative;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+/* ---------- Magnifier (Desktop Only) ---------- */
+.magnifier {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 200%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: 0.25s ease;
+}
+
+/* Disable magnifier on touch devices */
+@media (hover: none) {
+  .magnifier {
+    display: none;
+  }
+}
+
+/* ---------- Product Info ---------- */
+.product-title {
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.badge {
+  background: #eef2e5;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.rating {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.stars {
+  color: #f5b301;
+}
+
+.price-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.discount {
+  background: orange;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.description {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* ---------- Size ---------- */
+.size-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.size-btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.size-btn.active {
+  color: black;
+  border:2px solid orange;
+}
+
+/* ---------- Cart ---------- */
+.cart-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px;
+}
+
+.qty button {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+.qty span {
+  width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.add-cart {
+  flex: 1;
+  background: black;
+  color: #fff;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.add-cart:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ---------- Features ---------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.feature {
+  background: #f9fafb;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight:600;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-direction:column;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .product-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .product-image {
+    order: 1;
+    padding: 10px;
+    border-radius:10px;
+  }
+
+  .thumbnails {
+    order: 2;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+    scrollbar-width: none;
+  }
+
+  .thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .thumb {
+    flex: 0 0 72px;
+  }
+
+  .product-info {
+    order: 3;
+  }
+}
+
+
+/* description start */
+:root{
+  --text:#111;
+  --muted:#888;
+  --border:#eee;
+  --box:#f5f5f5;
+  --accent:#111;
+  --radius:14px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* ---------------- Tabs ---------------- */
+.tabs{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  padding-bottom:14px;
+}
+
+.tab-buttons{
+  display:flex;
+  gap:24px;
+}
+
+.tab-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  font-weight:500;
+  color:#aaa;
+  cursor:pointer;
+}
+
+.tab-btn.active{
+  color:#000;
+}
+
+.social{
+  display:flex;
+  gap:12px;
+}
+
+.social span{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+/* ---------------- Content ---------------- */
+.tab-content{
+  display:none;
+  margin-top:24px;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+.description{
+  color:#777;
+  max-width:900px;
+  line-height:1.7;
+}
+
+/* ---------------- Specs ---------------- */
+.specs{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:16px;
+  margin-top:40px;
+}
+
+.spec{
+  
+    background: linear-gradient(135deg,
+  #FFA726 0%,
+  #FB8C00 35%,
+  #EF6C00 70%,
+  #E65100 100%
+);
+
+  padding:24px;
+  border-radius:var(--radius);
+  text-align:center;
+}
+
+.spec span{
+  display:block;
+  color:#000;
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.spec strong{
+  font-size:15px;
+  color:#fff;
+}
+
+/* ---------------- Reviews ---------------- */
+.review{
+  border-bottom:1px solid var(--border);
+  padding:16px 0;
+}
+
+.review strong{
+  display:block;
+}
+
+.review p{
+  color:#777;
+  font-size:14px;
+}
+
+/* ---------------- Benefits Slider ---------------- */
+.benefits{
+  margin-top:80px;
+}
+
+.benefits h2{
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.slider{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+}
+
+.slider::-webkit-scrollbar{display:none}
+
+.slide{
+  min-width:280px;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  padding:20px;
+  transition:0.3s;
+}
+
+.slide.active{
+  transform:scale(1.05);
+}
+
+.slide img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:12px;
+}
+
+.slide h4{
+  margin-bottom:6px;
+}
+
+.slide p{
+  font-size:14px;
+  color:#777;
+}
+
+/* ---------------- Mobile ---------------- */
+@media(max-width:900px){
+  .specs{grid-template-columns:repeat(2,1fr)}
+  .tab-btn{font-size:18px}
+  .page{margin-top:5rem}
+}
+
+
+
+/* ===== FOOTER WRAPPER ===== */
+.foo{
+  padding:20px;
+  background-color: #ff6b2c;
+}
+
+.footer {
+  background: #fff;
+  border-radius: 30px;
+  color: #000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== NEWSLETTER ===== */
+.footer-top {
+  padding: 50px 20px;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.651); */
+}
+
+hr{
+  margin: 0px 30px;
+}
+
+.newsletter {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.news-left h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.news-left p {
+  opacity: 0.8;
+  font-size: 15px;
+}
+
+.news-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.news-form input {
+  padding: 14px 16px;
+  width: 260px;
+  border-radius: 8px;
+  border: 1px solid black;
+  outline: none;
+}
+
+.news-form button {
+  padding: 14px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7a2f;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.news-form button:hover {
+  background: #ff8c4a;
+}
+
+/* ===== FOOTER CONTENT ===== */
+.footer-main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+
+.footer-brand p {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* ===== FOOTER LINKS ===== */
+.footer-col h4 {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+
+.footer-col ul li a:hover {
+  color: #ff7a2f;
+}
+
+/* ===== FOOTER BOTTOM ===== */
+.footer-bottom {
+  /* border-top: 1px solid rgba(0, 0, 0, 0.644); */
+  padding: 18px 20px;
+}
+
+.footer-bottom-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .footer-main {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .newsletter {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .news-form input {
+    width: 100%;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+
+/* sudem */
+.subdem{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background-color: #fff;
+  box-shadow: 0px 0px 3px gray;
+  color: black;
+  width: 290px;
+  min-height: 110vh;
+  text-align: left;
+  display: none;
+  justify-content: start;
+  align-items: start;
+  padding-top: 30px;
+  padding-left: 20px;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.subdem a{
+  font-size: 20px;
+}
+
+#checkoutForm input{
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-family: "Urbanist", sans-serif;
+}
+#checkoutForm textarea{
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Urbanist", sans-serif;
+}
+#checkoutForm button{
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #111;
+  color: white;
+  font-family: "Urbanist", sans-serif;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<!-- Navigation Bar Start -->
+<section class="main-nav">
+<nav class="barnav">
+  <a href="./index.html"><img src="./asset/tfd.png" class="logo"></a>
+  <div class="barnavsub">
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=pcnDMUt5ECc1&format=png&color=000000" width="16px">&nbsp;Need Help</a>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" width="16px">&nbsp;Search</a>
+    <a href="./user/index.php" style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=82840&format=png&color=000000" width="16px">&nbsp;Login / Register</a>
+  </div>
+  <div class="menubar">
+  <button class="menu"><img src="https://img.icons8.com/?size=100&id=7819&format=png&color=000000"></button>
+  <button class="menu" onclick="lite()"><img src="./asset/menu.svg"></button>
+  <div class="subdem" id="subdem">
+    <button onclick="pro()" style="background-color: transparent; border:none; width:100%; text-align: right; padding-right:30px;"><img src="https://img.icons8.com/?size=100&id=8112&format=png&color=000000" width="20px"></button>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=pcnDMUt5ECc1&format=png&color=000000" width="16px">&nbsp;Need Help</a>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" width="16px">&nbsp;Search</a>
+    <a href="./user/index.php" style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=82840&format=png&color=000000" width="16px">&nbsp;Login / Register</a>
+    <img src="./asset/pro.png" width="90%" style="border-radius: 10px; margin-top: 30px;">
+  </div>
+  </div>
+</nav>
+</section>
+<!-- Navigation Bar End -->
+
+
+<main class="page">
+<section class="product-layout">
+
+<!-- Thumbnails -->
+<aside class="thumbnails">
+  <div class="thumb active"><img src="./asset/pro1.png"></div>
+  <div class="thumb"><img src="./asset/pro1.png"></div>
+  <div class="thumb"><img src="./asset/pro1.png"></div>
+  <div class="thumb"><img src="./asset/pro1.png"></div>
+</aside>
+
+<!-- Image -->
+<div class="product-image" id="imageBox">
+  <img id="mainImage" src="./asset/pro1.png">
+  <div class="magnifier" id="magnifier"></div>
+</div>
+
+<!-- Info -->
+<div class="product-info">
+  <span class="badge">BEST SELLER</span>
+  <h1 class="product-title">Millet Grain Nutri Mix</h1>
+
+  <div class="rating">
+    <div class="stars">★★★★★</div>
+    <span>21 reviews</span>
+  </div>
+
+  <div class="price-row">
+    <div class="price"><b>₹299/-</b></div>
+    <div class="discount">20% OFF</div>
+  </div>
+
+  <p class="description">
+    Powered with natural millets to nourish, strengthen, and support everyday wellness.
+  </p>
+
+  <div class="size-selector">
+    <button class="size-btn active">100 gm</button>
+    <button class="size-btn">200 gm</button>
+  </div>
+
+  <div class="cart-row">
+    <div class="qty">
+      <button id="minus">−</button>
+      <span id="qtyValue">1</span>
+      <button id="plus">+</button>
+    </div>
+    <button class="add-cart">ADD TO CART</button>
+  </div>
+
+  <div class="features">
+    <div class="feature"><img src="https://img.icons8.com/?size=100&id=gwzAXNzvqCjq&format=png&color=000000" width="20px">Healthy Growth</div>
+    <div class="feature"><img src="https://img.icons8.com/?size=100&id=5353&format=png&color=000000" width="20px">Easy to Digest</div>
+    <div class="feature"><img src="https://img.icons8.com/?size=100&id=lXRwS2vrr4Cy&format=png&color=000000" width="20px">Boosts Immunity</div>
+    <div class="feature"><img src="https://img.icons8.com/?size=100&id=25632&format=png&color=000000" width="20px">100% Natural</div>
+  </div>
+</div>
+
+</section>
+</main>
+
+<!-- description -->
+
+<div class="container">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="desc">Description</button>
+      <button class="tab-btn" data-tab="reviews">Reviews</button>
+    </div>
+    <div class="social">
+      <span><img src="https://img.icons8.com/?size=100&id=11537&format=png&color=ffffff" width="20px"></span>
+      <span><img src="https://img.icons8.com/?size=100&id=62855&format=png&color=ffffff" width="20px"></span>
+      <!-- <span>FB</span> -->
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div id="desc" class="tab-content active">
+    <p class="description">
+      Our Millet Grain Nutri Mix is crafted using traditional sprouting methods to enhance nutrient absorption.
+      Rich in plant protein, fiber, and essential minerals, it supports digestion, immunity, and sustained energy.
+      Perfect for all age groups.
+    </p>
+  </div>
+
+  <!-- Reviews -->
+  <div id="reviews" class="tab-content">
+    <div class="review">
+      <strong>★★★★★ – Gokul</strong>
+      <p>My kids love it! Easy to digest and very filling.</p>
+    </div>
+    <div class="review">
+      <strong>★★★★☆ – Vignesh</strong>
+      <p>Great taste and quality ingredients. Highly recommended.</p>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="specs">
+    <div class="spec"><span>SKU</span><strong>KS202502</strong></div>
+    <div class="spec"><span>Flavor</span><strong>NATURAL</strong></div>
+    <div class="spec"><span>Ingredients</span><strong>MILLET, NUTS</strong></div>
+    <div class="spec"><span>Weight</span><strong>100g / 200g</strong></div>
+    <div class="spec"><span>Best For</span><strong>ALL AGES</strong></div>
+    <div class="spec"><span>Price</span><strong>₹299/-</strong></div>
+  </div>
+
+  <!-- Benefits -->
+  <div class="benefits">
+    <h2>Benefits of Millet Grain Nutri Mix</h2>
+
+    <div class="slider" id="slider">
+      <div class="slide active">
+        <img src="./asset/5.jpg">
+        <h4>Improves Digestion</h4>
+        <p>Sprouting reduces anti-nutrients and improves gut health.</p>
+      </div>
+      <div class="slide">
+        <img src="./asset/5.jpg">
+        <h4>Boosts Immunity</h4>
+        <p>Loaded with iron, zinc and antioxidants.</p>
+      </div>
+      <div class="slide">
+        <img src="./asset/5.jpg">
+        <h4>High Protein</h4>
+        <p>Supports muscle growth and daily energy needs.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foo">
+<footer class="footer">
+
+  <!-- Newsletter -->
+  <div class="footer-top">
+    <div class="newsletter">
+      <div class="news-left">
+        <h2>30% Off your first order</h2>
+        <p>Sign up to unlock your discount and enjoy our food</p>
+      </div>
+
+      <div class="news-form">
+        <input type="email" placeholder="Email address here">
+        <button>UNLOCK</button>
+      </div>
+    </div>
+  </div><hr>
+
+  <!-- Footer Content -->
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <img src="./asset/tfd.png" width="200px">
+      <p>Healthy millet-based nutrition for your baby’s growth and happiness.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>More Info</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Recipe Information</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>More Links</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Career & Training</a></li>
+        <li><a href="#">Press & Media</a></li>
+        <li><a href="#">Our Story</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Social Media</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+
+  </div><hr>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span>© 2026 Kiddy Spoon. All Rights Reserved</span>
+      <span>Back to top ↑</span>
+    </div>
+  </div>
+
+</footer>
+</div>
+
+<!-- popup -->
+ <!-- Checkout Modal -->
+<div id="checkoutModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999999; justify-content:center; align-items:center;">
+  <div style="background:#fff; width:420px; max-width:95%; padding:25px; border-radius:16px;">
+    
+    <section style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 30px;"><h3 style="">Fill the shipping details</h3><button style="background:transparent; border:none; outline: none;" class="no-cart"><img src="https://img.icons8.com/?size=100&id=r59dPnuOmDxw&format=png&color=000000" width="20px"></button></section>
+
+<form id="checkoutForm">
+
+  <input type="text" id="c_name" placeholder="Full Name" required>
+  <input type="tel" id="c_mobile" placeholder="Mobile Number" required>
+  <input type="email" id="c_email" placeholder="Email" required>
+  <textarea id="c_address" placeholder="Delivery Address" required></textarea>
+
+  <!-- Hidden order details -->
+  <input type="hidden" id="c_product">
+  <input type="hidden" id="c_size">
+  <input type="hidden" id="c_qty">
+  <input type="hidden" id="c_price">
+
+  <button type="submit" style="font-weight: 600; font-size:16px;">Pay ₹<span id="totalAmount">0</span></button>
+</form>
+
+
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+const pricePerUnit = 299;
+const checkoutModal = document.getElementById("checkoutModal");
+
+/* OPEN CHECKOUT MODAL */
+document.querySelector(".add-cart").onclick = () => {
+  const product = document.querySelector(".product-title").innerText;
+  const size = document.querySelector(".size-btn.active").innerText;
+  const qty = parseInt(qtyText.textContent);
+  const total = qty * pricePerUnit;
+
+  document.getElementById("c_product").value = product;
+  document.getElementById("c_size").value = size;
+  document.getElementById("c_qty").value = qty;
+  document.getElementById("c_price").value = total;
+
+  document.getElementById("totalAmount").innerText = total;
+  checkoutModal.style.display = "flex";
+};
+
+/* CLOSE CHECKOUT MODAL */
+document.querySelector(".no-cart").onclick = () => {
+  checkoutModal.style.display = "none";
+}
+
+/* SUBMIT & PAY */
+document.getElementById("checkoutForm").onsubmit = function(e){
+  e.preventDefault();
+
+  // Get form values
+  const nameEl = document.getElementById("c_name");
+if (!nameEl) {
+  alert("Checkout form input missing");
+  return;
+}
+const name = nameEl.value;
+
+  const mobile = document.getElementById("c_mobile").value;
+  const email = document.getElementById("c_email").value;
+  const address = document.getElementById("c_address").value;
+
+  const product = document.getElementById("c_product").value;
+  const size = document.getElementById("c_size").value;
+  const qty = parseInt(document.getElementById("c_qty").value);
+  const total = parseFloat(document.getElementById("c_price").value);
+
+  var options = {
+    key: "rzp_test_S10FYCfH4a8bbE",
+    amount: total * 100, // paise
+    currency: "INR",
+    name: "Kiddy Spoon",
+    description: "Order Payment",
+
+    handler: function (response) {
+
+      fetch("save_order.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          payment_id: response.razorpay_payment_id,
+          name: name,
+          mobile: mobile,
+          email: email,
+          address: address,
+          product: product,
+          size: size,
+          qty: qty,
+          total: total
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("Payment Successful!");
+        checkoutModal.style.display = "none";
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Order saved failed!");
+      });
+    }
+  };
+
+  var rzp = new Razorpay(options);
+  rzp.open();
+};
+</script>
+
+
+
+<script>
+  var subnav = document.getElementById("subdem");
+  function lite(){
+    subnav.style.display = "flex";
+  }
+  function pro(){
+    subnav.style.display = "none";
+  }
+</script>
+
+<script>
+/* Tabs */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tab-btn,.tab-content').forEach(el=>el.classList.remove('active'))
+    btn.classList.add('active')
+    document.getElementById(btn.dataset.tab).classList.add('active')
+  }
+})
+
+/* Auto slider */
+const slider=document.getElementById('slider')
+let index=0
+
+setInterval(()=>{
+  const slides=document.querySelectorAll('.slide')
+  slides.forEach(s=>s.classList.remove('active'))
+  index=(index+1)%slides.length
+  slides[index].classList.add('active')
+  slider.scrollLeft=slides[index].offsetLeft-20
+},3000)
+</script>
+
+<script>
+/* ---------- Image Switch ---------- */
+const mainImage = document.getElementById("mainImage");
+
+document.querySelectorAll(".thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+    thumb.classList.add("active");
+
+    const img = thumb.querySelector("img");
+    mainImage.style.opacity = "0";
+    setTimeout(() => {
+      mainImage.src = img.src;
+      mainImage.style.opacity = "1";
+    }, 120);
+  });
+});
+
+/* ---------- Magnifier ---------- */
+const box = document.getElementById("imageBox");
+const lens = document.getElementById("magnifier");
+
+box.addEventListener("mousemove", e => {
+  const rect = box.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  lens.style.opacity = "1";
+  lens.style.transform = "scale(1)";
+  lens.style.left = x - 70 + "px";
+  lens.style.top = y - 70 + "px";
+  lens.style.backgroundImage = `url(${mainImage.src})`;
+  lens.style.backgroundPosition = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+});
+
+box.addEventListener("mouseleave", () => {
+  lens.style.opacity = "0";
+  lens.style.transform = "scale(0.8)";
+});
+
+/* ---------- Size ---------- */
+document.querySelectorAll(".size-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+
+/* ---------- Quantity ---------- */
+let qty = 1;
+const qtyText = document.getElementById("qtyValue");
+
+document.getElementById("plus").onclick = () => {
+  qty++;
+  qtyText.textContent = qty;
+};
+
+document.getElementById("minus").onclick = () => {
+  if (qty > 1) {
+    qty--;
+    qtyText.textContent = qty;
+  }
+};
+</script>
+
+</body>
+</html>

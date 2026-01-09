@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiddy Spoon</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar Start -->
+<section class="main-nav">
+<nav class="barnav">
+  <img src="./asset/tfd.png" class="logo">
+  <div class="barnavsub">
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=pcnDMUt5ECc1&format=png&color=000000" width="16px">&nbsp;Need Help</a>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" width="16px">&nbsp;Search</a>
+    <a href="./user/index.php" style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=82840&format=png&color=000000" width="16px">&nbsp;Login / Register</a>
+  </div>
+  <div class="menubar">
+  <button class="menu"><img src="https://img.icons8.com/?size=100&id=7819&format=png&color=000000"></button>
+  <button class="menu" onclick="lite()"><img src="./asset/menu.svg"></button>
+  <div class="subdem" id="subdem">
+    <button onclick="pro()" style="background-color: transparent; border:none; width:100%; text-align: right; padding-right:30px;"><img src="https://img.icons8.com/?size=100&id=8112&format=png&color=000000" width="20px"></button>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=pcnDMUt5ECc1&format=png&color=000000" width="16px">&nbsp;Need Help</a>
+    <a style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" width="16px">&nbsp;Search</a>
+    <a href="./user/index.php" style="display:flex; justify-content:center; align-items:center; text-decoration: none; color:#000;"><img src="https://img.icons8.com/?size=100&id=82840&format=png&color=000000" width="16px">&nbsp;Login / Register</a>
+    <img src="./asset/pro.png" width="90%" style="border-radius: 10px; margin-top: 30px;">
+  </div>
+  </div>
+</nav>
+</section>
+<!-- Navigation Bar End -->
+<!-- Hero Section Start -->
+ <section class="promo-carousel">
+  <div class="carousel-container">
+    
+    <!-- Track -->
+    <div class="carousel-track">
+
+      <!-- Slide 1 -->
+      <div class="carousel-slide">
+        <img src="./asset/hero1.svg">
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide">
+        <img src="./asset/hero2.svg">
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide">
+        <img src="./asset/hero3.svg">
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="carousel-slide">
+        <img src="./asset/hero4.svg">
+      </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <button class="nav prev">‹</button>
+    <button class="nav next">›</button>
+
+    <!-- Dots -->
+    <div class="dots"></div>
+
+  </div>
+</section>
+<!-- Hero Section End -->
+<!-- Product Section Start -->
+<section class="menu-section">
+  <h2 class="menu-title">Our Product</h2>
+
+  <!-- Categories -->
+  <div class="menu-categories">
+    <span class="active" onclick="showall()" id="all">All</span>
+    <span onclick="mix()" id="mix">🥗 Health Mix</span>
+    <span onclick="food()" id="food">🥤 Tiny Foods</span>
+  </div>
+
+  <!-- Carousel -->
+  <div class="menu-carousel">
+
+    <div class="menu-track">
+      <!-- Card -->
+      <div class="menu-card" id="pro1">
+        <img src="./asset/pro1.png">
+        <div class="card-info">
+          <h3>Sprouted Ragi Porridge Pack</h3><br>
+          <a href="./product.html"><button>View</button></a>
+        </div>
+      </div>
+
+      <div class="menu-card" id="pro2">
+        <img src="./asset/pro2.png">
+        <div class="card-info">
+          <h3>Millet Grains Nutri Mix</h3><br>
+          <a href="./product1.html"><button>View</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Section end -->
+<!-- Key Features Section Start -->
+<section class="poster-section">
+  <span class="badge">Green Living</span>
+
+  <h1>
+    NURTURE THE BODY WITH<br>
+    <span>FARM-FRESH</span> VEGETABLES
+  </h1>
+
+  <div class="poster-grid">
+
+    <!-- Left -->
+    <div class="features left">
+      <div class="feature">
+        <h3>🔥 High in Richness</h3>
+        <p>BiteBox is a nutrition powerhouse, packed with antioxidants, micro, and macronutrients.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🥗 Healthy Flavors</h3>
+        <p>Our meals prove that nutritional food can also be really tasty.</p>
+      </div>
+    </div>
+
+    <!-- Center Image -->
+    <div class="image-box">
+      <video src="./asset/final.mp4" autoplay loop muted>
+    </div>
+
+    <!-- Right -->
+    <div class="features right">
+      <div class="feature">
+        <h3>💜 Love in every bite</h3>
+        <p>We believe in details & excellent things take time.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🍲 Un-refined Goodness</h3>
+        <p>We use raw materials free of additives, so trust their purity.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Key Features Section End -->
+<!-- how to buy start -->
+<section class="how-it-works">
+  <small>How to Buy</small>
+  <h2>Kiddy Spoon Healthy Mix</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <h4>Select Product</h4>
+      <p>Choose your Kiddy Spoon health & millet-based baby food.</p>
+      <img src="./asset/1.png" alt="Select Product">
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <h4>Signup / Login</h4>
+      <p>Create an account or login using your mobile or email.</p>
+      <img src="./asset/2.png" alt="Signup Login">
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <h4>Add to Cart</h4>
+      <p>Add selected products to cart and review quantity.</p>
+      <img src="./asset/3.png" alt="Add to Cart">
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <h4>Order & Pay</h4>
+      <p>Checkout and make secure online payment.</p>
+      <img src="./asset/4.jpg" alt="Payment">
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <h4>Delivery in 7 Days</h4>
+      <p>Your order will be delivered safely within 7 days.</p>
+      <img src="./asset/5.jpg" alt="Delivery">
+    </div>
+
+  </div>
+</section>
+
+<!-- how to buy end -->
+ <div class="">
+  <img src="./asset/b.png" width="100%">
+ </div>
+
+<div class="foo">
+<footer class="footer">
+
+  <!-- Newsletter -->
+  <div class="footer-top">
+    <div class="newsletter">
+      <div class="news-left">
+        <h2>30% Off your first order</h2>
+        <p>Sign up to unlock your discount and enjoy our food</p>
+      </div>
+
+      <div class="news-form">
+        <input type="email" placeholder="Email address here">
+        <button>UNLOCK</button>
+      </div>
+    </div>
+  </div><hr>
+
+  <!-- Footer Content -->
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <img src="./asset/tfd.png" width="200px">
+      <p>Healthy millet-based nutrition for your baby’s growth and happiness.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>More Info</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Recipe Information</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>More Links</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Career & Training</a></li>
+        <li><a href="#">Press & Media</a></li>
+        <li><a href="#">Our Story</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Social Media</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+
+  </div><hr>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span>© 2026 Kiddy Spoon. All Rights Reserved</span>
+      <span>Back to top ↑</span>
+    </div>
+  </div>
+
+</footer>
+</div>
+<!-- whatsapp -->
+ <!-- WhatsApp Floating Section -->
+<div class="whatsapp-float">
+  <div class="whatsapp-popup" id="waPopup">
+    Hai there 👋 <br>
+    Need help? Chat with us
+  </div>
+
+  <a href="https://wa.me/919999999999" target="_blank" class="whatsapp-btn">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+</div>
+<script>
+  const popup = document.getElementById('waPopup');
+
+  function showPopup() {
+    popup.classList.add('show');
+
+    setTimeout(() => {
+      popup.classList.remove('show');
+    }, 2500); // popup visible time
+  }
+
+  // Initial popup
+  setTimeout(showPopup, 2000);
+
+  // Repeat every 4 seconds
+  setInterval(showPopup, 5000);
+</script>
+
+
+
+<script>
+const track = document.querySelector('.carousel-track');
+const slides = document.querySelectorAll('.carousel-slide');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const dotsWrap = document.querySelector('.dots');
+
+let index = 0;
+let startX = 0;
+let isDragging = false;
+let autoSlide;
+
+/* Create dots */
+slides.forEach((_, i) => {
+  const dot = document.createElement('span');
+  if (i === 0) dot.classList.add('active');
+  dotsWrap.appendChild(dot);
+});
+const dots = document.querySelectorAll('.dots span');
+
+function updateCarousel() {
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach(d => d.classList.remove('active'));
+  dots[index].classList.add('active');
+}
+
+function nextSlide() {
+  index = (index + 1) % slides.length;
+  updateCarousel();
+}
+
+function prevSlide() {
+  index = (index - 1 + slides.length) % slides.length;
+  updateCarousel();
+}
+
+/* Buttons */
+nextBtn.onclick = nextSlide;
+prevBtn.onclick = prevSlide;
+
+/* Dots click */
+dots.forEach((dot, i) => {
+  dot.onclick = () => {
+    index = i;
+    updateCarousel();
+  };
+});
+
+/* Auto Slide */
+function startAuto() {
+  autoSlide = setInterval(nextSlide, 4000);
+}
+function stopAuto() {
+  clearInterval(autoSlide);
+}
+startAuto();
+
+/* Drag / Swipe */
+track.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.clientX;
+  stopAuto();
+});
+
+track.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  const diff = e.clientX - startX;
+  if (diff > 50) prevSlide();
+  if (diff < -50) nextSlide();
+  isDragging = false;
+  startAuto();
+});
+
+track.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  stopAuto();
+});
+
+track.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (diff > 50) prevSlide();
+  if (diff < -50) nextSlide();
+  startAuto();
+});
+</script>
+
+
+<!-- drawer product -->
+<script>
+window.onload = function () {
+
+  const dem1 = document.getElementById("all");
+  const dem2 = document.getElementById("mix");
+  const dem3 = document.getElementById("food");
+
+  const pro1 = document.getElementById("pro1");
+  const pro2 = document.getElementById("pro2");
+
+  function resetTabs() {
+    [dem1, dem2, dem3].forEach(el => {
+      // el.style.opacity = "0.6";
+      el.style.borderBottom = "none";
+    });
+  }
+
+  window.showall = function () {
+    pro1.style.display = "";
+    pro2.style.display = "";
+    resetTabs();
+    dem1.style.opacity = "1";
+    dem1.style.borderBottom = "2px solid black";
+  };
+
+  window.mix = function () {
+    pro1.style.display = "";
+    pro2.style.display = "none";
+    resetTabs();
+    dem2.style.opacity = "1";
+    dem2.style.borderBottom = "2px solid black";
+  };
+
+  window.food = function () {
+    pro1.style.display = "none";
+    pro2.style.display = "none";
+    resetTabs();
+    dem3.style.opacity = "1";
+    dem3.style.borderBottom = "2px solid black";
+  };
+
+};
+</script>
+
+
+<script>
+  var subnav = document.getElementById("subdem");
+  function lite(){
+    subnav.style.display = "flex";
+  }
+  function pro(){
+    subnav.style.display = "none";
+  }
+</script>
+
+</body>
+</html>
